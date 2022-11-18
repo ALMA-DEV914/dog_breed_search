@@ -2,8 +2,6 @@
 
 This is a single-page application to search for photos of nice doggies. 🐶
 
-<img src="./DogSearch.png" width="500">
-
 Also, it provided me with the opportunity to practice working with [TypeScript + React](https://reactjs.org/docs/static-type-checking.html#typescript)!
 
 ---
@@ -47,31 +45,6 @@ See the following state machines as interactive visualizations:
 One goal I had was to create Types for the various states of the Finite State Machine (FSM), as well as the Actions that cause the FSM to transition. Redux's documentation on TypeScript does [describe an approach](https://redux.js.org/recipes/usage-with-typescript) of creating Actions using string literals, which would have sufficed.
 
 However, one missing piece with this approach was a parent object that could contain references to all those string literals. This single object can make exporting less tedious and also provide helpful auto-complete:
-
-```
-const ALL_FSM_STATES = {
-    STATE_1: "STATE_1",
-    STATE_2: "STATE_2",
-    // ... Additional States
-};
-// Typing this below: "ALL_FSM_STATES."
-// and then prompting autocomplete would show the list of state names
-// ALL_FSM_STATES.STATE_1
-// ALL_FSM_STATES.STATE_2
-```
-
-Luckily, I eventually found a [description of a utility function](https://basarat.gitbooks.io/typescript/docs/types/literal-types.html) that accomplished this goal! So thus, this project has the following approach to Types:
-
-```
-/** Create parent object using utility function. */
-const Direction = strEnum(['North', 'South', 'East','West']);
-
-/** Create a Type from the parent object */
-type Direction = keyof typeof Direction;
-
-// Here, the Direction object can provide autocomplete behavior,
-// and the Direction Type can provide type-safety!
-```
 
 ### User Interface Layout
 
