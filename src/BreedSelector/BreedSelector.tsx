@@ -1,5 +1,13 @@
 import React from 'react';
-import { Button, Card, CardImg, Col, Row, Spinner } from 'reactstrap';
+import {
+  Button,
+  Card,
+  ImageListItem,
+  ImageList,
+  Grid,
+  CircularProgress,
+  Container
+} from '@mui/material';
 import './BreedSelector.css';
 import ButtonGrid from '../ButtonGrid';
 import { Breed } from '../App/useAppHook/getAllBreeds';
@@ -23,13 +31,11 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
   );
 
   return (
-    <>
+    <Container>
       {props.breeds.length === 0 ? (
-        <Row>
-          <Col>
-            <h2>No Breed Matches Found.</h2>
-          </Col>
-        </Row>
+        <Grid>
+          <h2>No Breed Matches Found.</h2>
+        </Grid>
       ) : (
         <ButtonGrid
           elementList={breedDisplayNames}
@@ -43,20 +49,20 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
         />
       )}
       {fsmStatus === Statuses.PENDING && (
-        <Row>
-          <Col>
-            <Spinner color="primary" />
+        <Grid>
+          <Card>
+            <CircularProgress color="secondary" />
             <h2 className="loading-text">Loading...</h2>
-          </Col>
-        </Row>
+          </Card>
+        </Grid>
       )}
       {fsmStatus === Statuses.ERROR && (
-        <Row>
-          <Col>
+        <Grid>
+          <Card>
             <h2>Something went wrong while loading the dogs:</h2>
             <h3>{state.errorMessage}</h3>
             <Button
-              color="danger"
+              color="warning"
               type="button"
               onClick={() =>
                 dispatch(sendBreedButtonClicked(state.selectedBreed))
@@ -64,33 +70,31 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
             >
               Try Again?
             </Button>
-          </Col>
-        </Row>
+          </Card>
+        </Grid>
       )}
       {fsmStatus === Statuses.IDLE && selectedBreed !== '' && (
-        <Row>
-          <Col>
+        <Grid>
+          <Card>
             <h2>
               Done!{' '}
               <span role="img" aria-label="dog face">
                 🐶
               </span>
             </h2>
-          </Col>
-        </Row>
+          </Card>
+        </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
-        <Row className="image-grid bg-light">
+        <ImageList sx={{ width: 1200, height: 1200 }} cols={3} rowHeight={400}>
           {imageURLs.slice(0, 51).map((imageURL, i) => (
-            <Col sm="4" key={i}>
-              <Card inverse>
-                <CardImg width="100%" src={imageURL} alt="Card image cap" />{' '}
-              </Card>
-            </Col>
+            <ImageListItem key={i}>
+              <img src={imageURL} srcSet={imageURL} alt="card" loading="lazy" />
+            </ImageListItem>
           ))}
-        </Row>
+        </ImageList>
       )}
-    </>
+    </Container>
   );
 };
 

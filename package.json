@@ -2,18 +2,20 @@
   "name": "dog_breed_search",
   "version": "1.0.0",
   "description": "",
-"dependencies": {
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.14",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
     "@types/reactstrap": "^8.0.4",
-    "axios": "^0.19.0",
+    "axios": "^1.1.3",
     "bootstrap": "^4.3.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1",
-    "reactstrap": "^8.0.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.1",
     "typescript": "3.6.3"
   },
   "scripts": {
@@ -54,7 +56,9 @@
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1"
+    "pretty-quick": "^1.11.1",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1"
   },
   "keywords": [],
   "author": "ALMA_DEV914",

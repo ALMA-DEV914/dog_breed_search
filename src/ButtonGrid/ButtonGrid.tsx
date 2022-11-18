@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Row } from 'reactstrap';
+import { Button, Card, Grid } from '@mui/material';
 import './ButtonGrid.css';
 
 interface ButtonGridProps {
@@ -30,7 +30,7 @@ const ButtonGrid: React.FC<ButtonGridProps> = props => {
 
   for (let colIndex = 0; colIndex < numColumns; colIndex += 1) {
     columns.push(
-      <Col key={colIndex} className="btn-col" md={12 / numColumns}>
+      <Card key={colIndex} className="btn-col">
         {partialList
           .slice(colIndex * perColumn, colIndex * perColumn + perColumn)
           .map(element => (
@@ -43,11 +43,11 @@ const ButtonGrid: React.FC<ButtonGridProps> = props => {
               {element}
             </Button>
           ))}
-      </Col>
+      </Card>
     );
   }
 
-  return <Row className="btn-grid">{columns}</Row>;
+  return <Grid className="btn-grid">{columns}</Grid>;
 };
 
 export default ButtonGrid;

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import {
   Button,
-  Col,
   Container,
-  Row,
-  Spinner,
+  Stack,
+  ListItem,
+  CircularProgress,
   Input,
-  InputGroup
-} from 'reactstrap';
+  TextField
+} from '@mui/material';
+
 import { useAppHook } from './useAppHook/useAppHook';
 import { Statuses } from './useAppHook/types';
 import { sendFetchInit } from './useAppHook/actions';
@@ -25,47 +26,42 @@ const App: React.FC = () => {
 
   return (
     <Container className="App">
-      <Row className="header-row">
-        <Col sm={12} md={6}>
-          <header className="App-header">
-            <h1 className="text-primary">Dogs!</h1>
-          </header>
-        </Col>
-        <Col className="searchbar-col" sm={12} md={6}>
-          <InputGroup>
-            <Input
-              type="text"
-              name="searchbar"
-              id="searchbar"
-              placeholder="Search"
-              value={searchbar}
-              onChange={e => setSearchbar(e.target.value)}
-            />
-          </InputGroup>
-        </Col>
-      </Row>
+      <Stack className="header-row">
+        <header className="App-header">
+          <h1 className="text-primary">Dog Breed Search</h1>
+        </header>
+
+        <Input
+          type="text"
+          name="searchbar"
+          id="searchbar"
+          placeholder="Search by breed or sub-breed"
+          value={searchbar}
+          onChange={e => setSearchbar(e.target.value)}
+        />
+      </Stack>
       {state.fsmStatus === PENDING && (
-        <Row>
-          <Col>
-            <Spinner color="primary" />
+        <Stack>
+          <ListItem>
+            <CircularProgress color="secondary" />
             <h2 className="loading-text">Loading Dog Breeds...</h2>
-          </Col>
-        </Row>
+          </ListItem>
+        </Stack>
       )}
       {state.fsmStatus === ERROR && (
-        <Row>
-          <Col>
+        <Stack>
+          <ListItem>
             <h2>Something went wrong while loading the dogs:</h2>
             <h3>{state.errorMessage}</h3>
             <Button
-              color="danger"
+              color="warning"
               type="button"
               onClick={() => dispatch(sendFetchInit())}
             >
               Try Again?
             </Button>
-          </Col>
-        </Row>
+          </ListItem>
+        </Stack>
       )}
       {state.fsmStatus === IDLE && <BreedSelector breeds={filteredBreeds} />}
     </Container>

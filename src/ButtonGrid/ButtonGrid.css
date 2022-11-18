@@ -22,3 +22,23 @@
     min-height: 4rem;
   }
 }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 575px) {
+  .btn-grid > .btn-col + .btn-col {
+    margin-top: 0;
+  }
+  .btn-grid > .btn-col > .btn {
+    min-height: 4rem;
+  }
+}
+
+
+@media (min-width: 390px) {
+  .btn-grid > .btn-col + .btn-col {
+    margin-top: 0;
+  }
+  .btn-grid > .btn-col > .btn {
+    min-height: 4rem;
+  }
+}

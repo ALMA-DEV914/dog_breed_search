@@ -1,4 +1,7 @@
 .searchbar-col {
-  display: flex;
-  align-items: flex-end;
+  width: 100%;
+}
+.header-row{
+  text-align: center;
+  padding: 8px;
 }
