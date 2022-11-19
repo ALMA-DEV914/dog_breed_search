@@ -30,19 +30,8 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
     breedObj => breedObj.displayName
   );
 
-  
-  function srcset(image: string, size: number, rows = 1, cols = 1) {
-    return {
-      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-    };
-  }
-  
-
   return (
-    <Container>
+    <Container className='container'>
       {props.breeds.length === 0 ? (
         <Grid>
           <h2>No Breed Matches Found.</h2>
@@ -91,13 +80,7 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
-        <ImageList
-          sx={{ width: 1200, height: 600 }}
-          variant="quilted"
-          cols={3}
-          rowHeight={400}
-          className="img-grid"
-        >
+        <ImageList className="img-grid">
           {imageURLs.slice(0, 51).map((imageURL, i) => (
             <ImageListItem key={i} className="img-list">
               <img src={imageURL}  srcSet={imageURL} alt="card-name" loading="lazy" />
