@@ -1,3 +1,16 @@
-.image-grid {
+.grid{
+    margin: 3% auto;
+}
+.img-grid {
     margin-top: 15px;
+    
+}
+@media screen and (max-width:575px) {
+    .img-grid{
+        display: block;
+        width: 100%;
+    }
+    .img-list{
+        display: block;
+    }
 }

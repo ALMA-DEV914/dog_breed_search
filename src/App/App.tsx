@@ -30,7 +30,6 @@ const App: React.FC = () => {
         <header className="App-header">
           <h1 className="text-primary">Dog Breed Search</h1>
         </header>
-
         <Input
           type="text"
           name="searchbar"

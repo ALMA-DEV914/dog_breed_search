@@ -30,6 +30,17 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
     breedObj => breedObj.displayName
   );
 
+  
+  function srcset(image: string, size: number, rows = 1, cols = 1) {
+    return {
+      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+      srcSet: `${image}?w=${size * cols}&h=${
+        size * rows
+      }&fit=crop&auto=format&dpr=2 2x`,
+    };
+  }
+  
+
   return (
     <Container>
       {props.breeds.length === 0 ? (
@@ -42,7 +53,7 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
           selectedElement={state.selectedBreed}
           totalElements={12}
           numColumns={4}
-          perColumn={3}
+          perColumn={4}
           onElementClick={(displayName: string) => {
             dispatch(sendBreedButtonClicked(displayName));
           }}
@@ -50,46 +61,46 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
       )}
       {fsmStatus === Statuses.PENDING && (
         <Grid>
-          <Card>
-            <CircularProgress color="secondary" />
-            <h2 className="loading-text">Loading...</h2>
-          </Card>
+          <CircularProgress color="secondary" />
+          <h2 className="loading-text">Loading...</h2>
         </Grid>
       )}
       {fsmStatus === Statuses.ERROR && (
         <Grid>
-          <Card>
-            <h2>Something went wrong while loading the dogs:</h2>
-            <h3>{state.errorMessage}</h3>
-            <Button
-              color="warning"
-              type="button"
-              onClick={() =>
-                dispatch(sendBreedButtonClicked(state.selectedBreed))
-              }
-            >
-              Try Again?
-            </Button>
-          </Card>
+          <h2>Something went wrong while loading the dogs:</h2>
+          <h3>{state.errorMessage}</h3>
+          <Button
+            color="warning"
+            type="button"
+            onClick={() =>
+              dispatch(sendBreedButtonClicked(state.selectedBreed))
+            }
+          >
+            Try Again?
+          </Button>
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && selectedBreed !== '' && (
-        <Grid>
-          <Card>
-            <h2>
-              Done!{' '}
-              <span role="img" aria-label="dog face">
-                🐶
-              </span>
-            </h2>
-          </Card>
+        <Grid className='grid'>
+          <h2>
+            Enjoy different images!{' '}
+            <span role="img" aria-label="dog face">
+              🐶
+            </span>
+          </h2>
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
-        <ImageList sx={{ width: 1200, height: 1200 }} cols={3} rowHeight={400}>
+        <ImageList
+          sx={{ width: 1200, height: 600 }}
+          variant="quilted"
+          cols={3}
+          rowHeight={400}
+          className="img-grid"
+        >
           {imageURLs.slice(0, 51).map((imageURL, i) => (
-            <ImageListItem key={i}>
-              <img src={imageURL} srcSet={imageURL} alt="card" loading="lazy" />
+            <ImageListItem key={i} className="img-list">
+              <img src={imageURL}  srcSet={imageURL} alt="card-name" loading="lazy" />
             </ImageListItem>
           ))}
         </ImageList>

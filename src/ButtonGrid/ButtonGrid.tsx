@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Grid } from '@mui/material';
+import { Button, Grid, ButtonGroup } from '@mui/material';
 import './ButtonGrid.css';
 
 interface ButtonGridProps {
@@ -30,11 +30,12 @@ const ButtonGrid: React.FC<ButtonGridProps> = props => {
 
   for (let colIndex = 0; colIndex < numColumns; colIndex += 1) {
     columns.push(
-      <Card key={colIndex} className="btn-col">
+      <ButtonGroup key={colIndex} variant="contained" aria-label="outlined primary button group" className="btn-col">
         {partialList
           .slice(colIndex * perColumn, colIndex * perColumn + perColumn)
           .map(element => (
             <Button
+            style={{margin: "5px"}}
               key={element}
               color={element === selectedElement ? 'primary' : 'secondary'}
               type="button"
@@ -43,7 +44,7 @@ const ButtonGrid: React.FC<ButtonGridProps> = props => {
               {element}
             </Button>
           ))}
-      </Card>
+      </ButtonGroup>
     );
   }
 
