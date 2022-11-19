@@ -1,4 +1,4 @@
-# Dog Search
+# Dog Breed Search
 
 This is a single-page application to search for photos of nice doggies. 🐶
 
@@ -35,10 +35,10 @@ Modeling the application with state machines will make easier to support extensi
 See the following state machines as interactive visualizations:
 
 - [Click here](https://xstate.js.org/viz/?gist=464b097c1f2061d8ccde857f1fd060ce) to interact with the `App` Component's state machine visualization.
-  ![App Component](./img/FiniteStateMachine_AppComponent.png)
+  
 
 - [Click here](https://xstate.js.org/viz/?gist=862063fd29ac5959193d07758e32cfc9) to interact with the `BreedSelector` Component's state machine visualization.
-  ![App Component](./img/FiniteStateMachine_BreedSelectorComponent.png)
+  
 
 ### TypeScript Types
 
