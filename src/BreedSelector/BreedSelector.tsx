@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
-  Card,
   ImageListItem,
   ImageList,
   Grid,
   CircularProgress,
+  useMediaQuery,
   Container
 } from '@mui/material';
 import './BreedSelector.css';
@@ -22,16 +22,28 @@ interface BreedSelectorProps {
 /**
  * Manages the user's selection of breed buttons and the corresponding images.
  */
+
+ const LIMIT_MOBILE = 5;
+ const LIMIT_WEB = 10;
+
 const BreedSelector: React.FC<BreedSelectorProps> = props => {
   const [state, dispatch] = useBreedSelectorHook(props.breeds);
   const { fsmStatus, imageURLs, selectedBreed } = state;
-
+  const isMobile = useMediaQuery('500');
+  const inititalLimit = isMobile ? LIMIT_MOBILE : LIMIT_WEB;
+  const [limit, setLimit] = useState(inititalLimit);
+  
   const breedDisplayNames: string[] = props.breeds.map(
     breedObj => breedObj.displayName
   );
 
+  const showMoreDocuments = () => {
+    setLimit(limit + 5);
+  };
+
+
   return (
-    <Container className='container'>
+    <Container className="container">
       {props.breeds.length === 0 ? (
         <Grid>
           <h2>No Breed Matches Found.</h2>
@@ -70,7 +82,7 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && selectedBreed !== '' && (
-        <Grid className='grid'>
+        <Grid className="grid">
           <h2>
             Enjoy different images!{' '}
             <span role="img" aria-label="dog face">
@@ -80,13 +92,21 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
-        <ImageList className="img-grid">
-          {imageURLs.slice(0, 51).map((imageURL, i) => (
-            <ImageListItem key={i} className="img-list">
-              <img src={imageURL}  srcSet={imageURL} alt="card-name" loading="lazy" />
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <>
+          <ImageList className="img-grid" variant="masonry" cols={3} gap={8}>
+            {imageURLs.slice(0, limit).map((imageURL, i) => (
+              <ImageListItem key={i} className="img-list">
+                <img
+                  src={imageURL}
+                  srcSet={imageURL}
+                  alt="card-name"
+                  loading="lazy"
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
+          <Button variant="outlined" onClick={showMoreDocuments}>{limit}{" "} images</Button>
+          </>
       )}
     </Container>
   );
