@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   ImageListItem,
@@ -23,8 +23,8 @@ interface BreedSelectorProps {
  * Manages the user's selection of breed buttons and the corresponding images.
  */
 
- const LIMIT_MOBILE = 5;
- const LIMIT_WEB = 10;
+const LIMIT_MOBILE = 5;
+const LIMIT_WEB = 10;
 
 const BreedSelector: React.FC<BreedSelectorProps> = props => {
   const [state, dispatch] = useBreedSelectorHook(props.breeds);
@@ -32,7 +32,7 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
   const isMobile = useMediaQuery('500');
   const inititalLimit = isMobile ? LIMIT_MOBILE : LIMIT_WEB;
   const [limit, setLimit] = useState(inititalLimit);
-  
+
   const breedDisplayNames: string[] = props.breeds.map(
     breedObj => breedObj.displayName
   );
@@ -40,7 +40,6 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
   const showMoreDocuments = () => {
     setLimit(limit + 5);
   };
-
 
   return (
     <Container className="container">
@@ -89,24 +88,24 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
               🐶
             </span>
           </h2>
+          <Button variant="outlined" onClick={showMoreDocuments}>
+            {limit} images and more
+          </Button>
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
-        <>
-          <ImageList className="img-grid" variant="masonry" cols={3} gap={8}>
-            {imageURLs.slice(0, limit).map((imageURL, i) => (
-              <ImageListItem key={i} className="img-list">
-                <img
-                  src={imageURL}
-                  srcSet={imageURL}
-                  alt="card-name"
-                  loading="lazy"
-                />
-              </ImageListItem>
-            ))}
-          </ImageList>
-          <Button variant="outlined" onClick={showMoreDocuments}>{limit}{" "} images</Button>
-          </>
+        <ImageList className="img-grid" variant="masonry" cols={3} gap={8}>
+          {imageURLs.slice(0, limit).map((imageURL, i) => (
+            <ImageListItem key={i} className="img-list">
+              <img
+                src={imageURL}
+                srcSet={imageURL}
+                alt="card-name"
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
       )}
     </Container>
   );
