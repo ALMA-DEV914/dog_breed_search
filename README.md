@@ -1,6 +1,7 @@
 # Dog Breed Search
 
 This is a single-page application to search for photos of nice doggies. 🐶
+ The live site [https://mellow-heliotrope-0ac680.netlify.app/](https://mellow-heliotrope-0ac680.netlify.app/)
 
 Also, it provided me with the opportunity to practice working with [TypeScript + React](https://reactjs.org/docs/static-type-checking.html#typescript)!
 
@@ -66,7 +67,7 @@ I placed a maximum-height limit on the button-grid to ensure the results are at 
 
 ### Sub-breed Search
 
-While not mentioned in the specification, this application supports search by sub-breed (e.g. boston bulldog, english bulldog, french bulldog).
+This application supports search by sub-breed (e.g. boston bulldog, english bulldog, french bulldog).
 
 ### Future Improvements
 
