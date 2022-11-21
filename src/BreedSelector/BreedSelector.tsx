@@ -95,8 +95,7 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
             </span>
           </h2>
           <Button variant="outlined" onClick={showMoreDocuments}>
-            {limit} images and more
-          </Button>
+            {limit < imageURLs.length ? `${limit}+   "images"` : `${limit } "images" `}</Button>
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
