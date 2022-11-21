@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import {
   Button,
   ImageListItem,
@@ -50,9 +50,9 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
   return (
     <Container className="container">
       {props.breeds.length === 0 ? (
-        <Grid>
+        <Suspense fallback={<h2>No Breed Matches Found.</h2>}>
           <h2>No Breed Matches Found.</h2>
-        </Grid>
+        </Suspense>
       ) : (
         <ButtonGrid
           elementList={breedDisplayNames}
@@ -68,13 +68,14 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
       {fsmStatus === Statuses.PENDING && (
         <Grid>
           <CircularProgress color="secondary" />
-          <h2 className="loading-text">Loading...</h2>
+          <Suspense
+            fallback={<h2 className="loading-text">Loading...</h2>}>
+          </Suspense>
         </Grid>
       )}
       {fsmStatus === Statuses.ERROR && (
         <Grid>
-          <h2>Something went wrong while loading the dogs:</h2>
-          <h3>{state.errorMessage}</h3>
+          <Suspense fallback={<h3>{state.errorMessage}</h3>}></Suspense>
           <Button
             color="warning"
             type="button"
