@@ -24,11 +24,12 @@ interface BreedSelectorProps {
  */
 
 const LIMIT_MOBILE = 5;
-const LIMIT_WEB = 10;
+const LIMIT_WEB = 5;
 
 const BreedSelector: React.FC<BreedSelectorProps> = props => {
   const [state, dispatch] = useBreedSelectorHook(props.breeds);
   const { fsmStatus, imageURLs, selectedBreed } = state;
+
   const isMobile = useMediaQuery('500');
   const inititalLimit = isMobile ? LIMIT_MOBILE : LIMIT_WEB;
   const [limit, setLimit] = useState(inititalLimit);
@@ -38,7 +39,12 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
   );
 
   const showMoreDocuments = () => {
-    setLimit(limit + 5);
+    let count = imageURLs.length;
+    if (limit < count) {
+      setLimit(limit + 5);
+    } else {
+      setLimit(limit++);
+    }
   };
 
   return (
