@@ -5,9 +5,8 @@ import {
   Stack,
   ListItem,
   CircularProgress,
-  Input,
-  Menu,
-  MenuItem
+  Input
+
 } from '@mui/material';
 
 import { useAppHook } from './useAppHook/useAppHook';
@@ -25,17 +24,6 @@ const App: React.FC = () => {
     breed.displayName.includes(searchbar)
   );
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-
   return (
     <Container className="App">
       <Stack className="header-row">
@@ -49,9 +37,6 @@ const App: React.FC = () => {
           placeholder="Search by breed or sub-breed"
           value={searchbar}
           onChange={e => setSearchbar(e.target.value)}
-          aria-controls={open ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
         />
       </Stack>
       {state.fsmStatus === PENDING && (

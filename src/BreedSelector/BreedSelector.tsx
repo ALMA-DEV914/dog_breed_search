@@ -102,7 +102,7 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
-        <ImageList className="img-grid" variant="masonry" cols={3} gap={8}>
+        <ImageList className="img-grid" variant="masonry" cols={3}>
           {imageURLs.slice(0, limit).map((imageURL, i) => (
             <ImageListItem key={i} className="img-list">
               <img
