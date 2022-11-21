@@ -24,7 +24,7 @@ interface BreedSelectorProps {
  */
 
 const LIMIT_MOBILE = 5;
-const LIMIT_WEB = 5;
+const LIMIT_WEB = 10;
 
 const BreedSelector: React.FC<BreedSelectorProps> = props => {
   const [state, dispatch] = useBreedSelectorHook(props.breeds);
@@ -41,9 +41,9 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
   const showMoreDocuments = () => {
     let count = imageURLs.length;
     if (limit < count) {
-      setLimit(limit + 5);
+      setLimit(limit + 10);
     } else {
-      setLimit(limit++);
+      setLimit(count++);
     }
   };
 
@@ -95,7 +95,10 @@ const BreedSelector: React.FC<BreedSelectorProps> = props => {
             </span>
           </h2>
           <Button variant="outlined" onClick={showMoreDocuments}>
-            {limit < imageURLs.length ? `${limit}+   "images"` : `${limit } "images" `}</Button>
+            {limit < imageURLs.length
+              ? `${limit}  images out of ${imageURLs.length}`
+              : `${imageURLs.length} images `}
+          </Button>
         </Grid>
       )}
       {fsmStatus === Statuses.IDLE && (
