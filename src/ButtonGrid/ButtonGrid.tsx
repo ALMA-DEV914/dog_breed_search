@@ -30,12 +30,17 @@ const ButtonGrid: React.FC<ButtonGridProps> = props => {
 
   for (let colIndex = 0; colIndex < numColumns; colIndex += 1) {
     columns.push(
-      <ButtonGroup key={colIndex} variant="contained" aria-label="outlined primary button group" className="btn-col">
+      <ButtonGroup
+        key={colIndex}
+        variant="contained"
+        aria-label="outlined primary button group"
+        className="btn-col"
+      >
         {partialList
           .slice(colIndex * perColumn, colIndex * perColumn + perColumn)
           .map(element => (
             <Button
-            style={{margin: "5px"}}
+              style={{ margin: '5px' }}
               key={element}
               color={element === selectedElement ? 'primary' : 'secondary'}
               type="button"
